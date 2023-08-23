@@ -1,4 +1,4 @@
-import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { AfterContentChecked, AfterContentInit, AfterViewChecked, AfterViewInit, Attribute, Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-bye',
@@ -10,16 +10,19 @@ export class ByeComponent implements OnInit, OnChanges, AfterContentInit, AfterC
 
   // define input to create binding
   @Input() user!:string;
+  @Input() attributeBindingExample!: string;
 
-  constructor() { 
-    console.log("Bye component constructor");
+  // We can extract the value of attribute binding in the constructor using the @Attribute decorator
+  constructor(@Attribute("attributeBindingExample") attrVar:string) { 
+    console.log("Bye component constructor: Property input:"+this.user);
+    console.log("Bye component constructor: Attribute binding input:"+attrVar);
   }
   ngOnChanges(changes: SimpleChanges): void {
     console.log('Bye Component ngOnChanges');
   }
 
   ngOnInit(): void {
-    console.log("Bye component ngOnInit")
+    console.log("Bye component ngOnInit input:"+this.user)
   }
 
   ngAfterContentInit(): void {
